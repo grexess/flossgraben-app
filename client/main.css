@@ -100,6 +100,7 @@ td > a {
 }
 
 .content{
+  height: 50vh;
 }
 
 .centeredTable{
@@ -195,11 +196,15 @@ input[type=email] {
 }
 
 input[type=submit]:hover {
-    background-color: #2ca920;
+    background-color: #8c8c8c;
+}
+
+.errorField{
+  border: 1px solid red !important;
 }
 
 fieldset {
-  border: none;
+  border: 1px solid #ffffff;
 }
 
 label, option, select {
@@ -251,3 +256,26 @@ label, option, select {
   margin-left: 20%; 
 }
 
+div.table {
+	/**display: table;**/
+  border-collapse: collapse;
+  height: 100%;
+  overflow: auto;
+}
+
+div.th {
+  display: table-row;
+  font-weight: bold;
+}
+
+
+div.tr {
+	display: table-row;
+}
+
+div.td {
+	display: table-cell;
+	border: 0;
+  padding: 5px;
+  font-size: 0.7em;
+}

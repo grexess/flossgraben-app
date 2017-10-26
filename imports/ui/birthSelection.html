@@ -1,10 +1,9 @@
 <template name="birthSelection">
-    <label for="dob-day" class="control-label">Geburtstag</label>
+    <label for="dob-day" class="control-label">Geburtstag*</label>
     <div class="container">
         <div>
-            <select name="dob-day" id="dob-day">
-                <option value="">Tag</option>
-                <option value="">---</option>
+            <select name="dob-day" id="dob-day" class="validate">
+                <option value="" disabled selected>Tag</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -39,9 +38,8 @@
             </select>
         </div>
         <div>
-            <select name="dob-month" id="dob-month">
-                <option value="">Monat</option>
-                <option value="">-----</option>
+            <select name="dob-month" id="dob-month" class="validate">
+                <option value="" disabled selected>Monat</option>
                 <option value="01">Januar</option>
                 <option value="02">Februar</option>
                 <option value="03">März</option>
@@ -57,9 +55,8 @@
             </select>
         </div>
         <div>
-            <select name="dob-year" id="dob-year">
-                <option value="">Jahr</option>
-                <option value="">----</option>
+            <select name="dob-year" id="dob-year" class="validate">
+                <option value="" disabled selected>Jahr</option>
                 <option value="2012">2012</option>
                 <option value="2011">2011</option>
                 <option value="2010">2010</option>

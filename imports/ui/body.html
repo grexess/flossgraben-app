@@ -1,6 +1,4 @@
 <body>
-
-    <span class="markedText">X:{{runnersCount}}</span> 
   {{> myFrame}}
 </body>
 
@@ -73,23 +71,23 @@
 <template name="registerform">
   <form id="addRunnerForm">
     <div class="half leftForm cf">
-      <input type="text" placeholder="Dein Vorname" id="firstName" name="firstName">
-      <input type="email" placeholder="Deine eMail-Adresse" id="eMail" name="eMail">
+      <input type="text" placeholder="Dein Vorname*" id="firstName" name="firstName" class="validate">
+      <input type="email" placeholder="Deine eMail-Adresse*" id="eMail" name="eMail" class="validate">
      
     </div>
     <div class="half rightForm cf">
-      <input type="text" placeholder="Dein Nachname" id="lastName" name="lastName">
+      <input type="text" placeholder="Dein Nachname*" id="lastName" name="lastName" class="validate">
       <input type="text" placeholder="Dein Verein" id="club" name="club">
     </div>
      <div class="birth"><div class="innerBirth">
-        <fieldset id="gender">
+        <fieldset id="gender" class="validate">
             <input type="radio" name="gender" value="male">
             <label for="mc">Mädchen</label>
             <input type="radio" name="gender" value="female">
             <label for="mc">Junge</label>
           </fieldset> 
       {{> birthSelection }}</div></div>
-    <input id="submitBtn" type="submit" value="Ich lauf mit!">
+    <input id="submitBtn" type="submit" value="Ich will mitlaufen!">
   </form>
 </template>
 
@@ -105,7 +103,7 @@
         <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Registrierung">Registrierung</a>
       </li>
       <li>
-        <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Runners">Teilnehmerliste</a>
+        <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Runners">Teilnehmerliste <span id="count1">({{runnersCount}})</span></a>
       </li>
       <li>
         <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Strecke">Strecke</a>
@@ -119,16 +117,22 @@
   </div>
   <div id="2018-Registrierung" class="contentDiv">
     <p id="participants">Bisher haben sich schon
-      <span class="markedText">{{runnersCount}}</span> Teilnehmer angemeldet</p>
+      <span id="count2" class="markedText">{{runnersCount}}</span> Teilnehmer angemeldet</p>
 
     {{> registerform}}
 
   </div>
 
   <div id="2018-Runners" class="contentDiv">
-    <ul>
-      {{#each runners}} {{> runner}} {{/each}}
-    </ul>
+      <div class="table">
+          <div class="th">
+              <div class="td">Vorname</div>
+              <div class="td">Nachname</div>
+              <div class="td">Verein</div>
+              <div class="td">Altersklasse</div>
+            </div>
+              {{#each runners}} {{> runner}} {{/each}}
+          </div>
   </div>
 
   <div id="2018-Strecke" class="contentDiv">Strecke</div>
