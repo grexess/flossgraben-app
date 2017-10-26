@@ -38,7 +38,7 @@ td > a {
   color: #2CA920 !important;
 }
 
-#container {
+.container {
   display: flex;                  /* establish flex container */
   flex-direction: row;            /* default value; can be omitted */
   flex-wrap: nowrap;              /* default value; can be omitted */
@@ -70,6 +70,11 @@ td > a {
   text-align: center;
   padding: 10px 16px;
   text-decoration: none;
+}
+
+.markedText{
+  color: #2CA920;
+  font-weight: bold;
 }
 
 .center
@@ -193,6 +198,17 @@ input[type=submit]:hover {
     background-color: #2ca920;
 }
 
+fieldset {
+  border: none;
+}
+
+label, option, select {
+  color: #8c8c8c;
+  font-size: 13.3333px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
 .half {
   float: left;
   width: 48%;
@@ -225,3 +241,13 @@ input[type=submit]:hover {
 .cf:after {
     clear: both;
 }
+
+.birth{
+  clear: left;
+}
+
+.innerBirth{
+  margin-right: 20%; 
+  margin-left: 20%; 
+}
+
