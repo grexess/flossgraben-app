@@ -8,11 +8,11 @@ import './runner.js';
 import './birthSelection.js';
 import './body.html';
 
-function calculateGroup(day, month, year, gender){
+function calculateGroup(day, month, year, gender) {
 
 	var group = gender;
 	var today = new Date();
-	var birthday = new Date(year, month-1, day);
+	var birthday = new Date(year, month - 1, day);
 	var differenceInMilisecond = today.valueOf() - birthday.valueOf();
 	var year_age = Math.floor(differenceInMilisecond / 31536000000);
 	return group + "-" + year_age;
@@ -32,7 +32,7 @@ Template.body.events({
 
 			const gender = instance.$('input[name="gender"]:checked').val();
 			const birthday = instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val();
-			const group = calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(),instance.$('#dob-year :selected').val(),  gender);
+			const group = calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender);
 
 			Runners.insert({
 				firstName: instance.$('#firstName').val(),

@@ -279,3 +279,66 @@ div.td {
   padding: 5px;
   font-size: 0.7em;
 }
+
+.header1{
+  font-weight: bold;
+  display: block;
+  color: #2CA920;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.content1{
+font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+
+.ulItem {
+  list-style-type: none;
+}
+
+
+.leftSym {
+  float: left;
+  margin: 0 10px 0 0;
+  font-size: 40px;
+  color: #2CA920;
+}
+
+
+
+.liItem {
+  padding: 10px;
+  overflow: auto;
+}
+
+.liItem:hover {
+  background: #eee;
+  cursor: default;
+}
+
+.teaser1{
+  width: 100%;
+  text-align: center;
+  margin-top: 15%;
+}
+
+
+.mainLink a {
+
+  color: #535353;
+}
+
+.mainLink a:hover {
+  color: #2CA920;
+}
+
+.mainDetails{
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.impressum{
+  margin-left: 20%;
+  margin-right: 20%;
+}
