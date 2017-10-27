@@ -1,12 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
+import dataTablesBootstrap from 'datatables.net-bs';
+import 'datatables.net-bs/css/dataTables.bootstrap.css';
+dataTablesBootstrap(window, $);
 
 import { Runners } from '../api/runners.js';
+import { Tweets } from '../api/tweets.js';
+
+import '../api/dataTable.js';
 
 import './runner.js';
 import './birthSelection.js';
 import './body.html';
+
 
 function calculateGroup(day, month, year, gender) {
 
@@ -46,7 +53,20 @@ Template.body.events({
 			instance.$('#count1').text("(" + Runners.find().count() + ")");
 			instance.$('#count2').text(Runners.find().count());
 		}
+	},
+
+	//submit a new tweet
+	'click #submitComment': function (event, instance) {
+
+		Tweets.insert({
+			comment: instance.$('#comment').val(),
+			author: instance.$('#author').val()
+		});
+
+		instance.$('#comment').val("");
+		instance.$('#author').val("");
 	}
+
 });
 
 Template.thisYear.onCreated(function bodyOnCreated() {
@@ -56,10 +76,23 @@ Template.thisYear.onCreated(function bodyOnCreated() {
 Template.body.helpers({
 	runners() {
 		return Runners.find({});
-
 	},
 	runnersCount: function () {
 		return Runners.find().count();
+	}
+});
+
+Template.myFrame.onRendered(function(){
+	
+	   this.autorun(function(){
+		 Template.currentData();
+	   });
+	
+	});
+
+Template.myFrame.helpers({
+	tweets() {
+		return Tweets.find({});
 	}
 });
 

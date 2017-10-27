@@ -43,11 +43,30 @@
 
   {{> thisYear}}
 
+
   <!-- y -->
-  <div id="Toby-SecondNav" class="contentDiv">
+  <div id="Tweet-SecondNav" class="contentDiv">
   </div>
-  <div id="Toby-Content" class="contentDiv">
-    Toby ist doof
+  <div id="Tweet-Content" class="contentDiv">
+    <div class="comments">
+    Hier könnt Ihr Eure Tweets (Kommentare/Wünsche/Kritiken) hinterlassen. Ist aber erstmal nur ein "Test-Ballon"!
+    </div>  
+    <div class="half leftForm cf">
+    <input type="text" placeholder="Was gibt es hier zu hinterlassen?* (max. 140 Zeichen)" id="comment" name="comment" class="validateComment" pattern=".{3,}" size="140" maxlength="140">
+    </div>
+    <div class="half rigthForm cf">
+    <input type="text" placeholder="Von wem?* (max. 30 Zeichen)" id="author" name="author" class="validateComment" pattern=".{3,}" size="30" maxlength="30">
+  </div>  
+    <input id="submitComment" type="submit" value="Raus damit!">
+
+    <div class="tweetList">
+        <ul>
+            {{#each tweets}}
+            <li>({{text}}) {{comment}} </li>
+            {{/each}}
+          </ul>
+    </div>
+
   </div>
   <!-- Historie -->
   <div id="Historie-SecondNav" class="contentDiv">
@@ -228,15 +247,9 @@
   </div>
 
   <div id="2018-Runners" class="contentDiv">
-    <div class="table">
-      <div class="th">
-        <div class="td">Vorname</div>
-        <div class="td">Nachname</div>
-        <div class="td">Verein</div>
-        <div class="td">Altersklasse</div>
-      </div>
-      {{#each runners}} {{> runner}} {{/each}}
-    </div>
+    <div class="runnersTable">
+      {{> tabular table=TabularTables.Runners class="table table-striped table-bordered table-condensed"}}
+    </div>          
   </div>
 
   <div id="2018-Strecke" class="contentDiv">Strecke</div>
@@ -342,7 +355,7 @@ recht24.de/impressum-generator.html">https://www.e-recht24.de/impressum-generato
     <div class="topnav" id="myTopnav">
       <a href="#" class="click active1" data-target="Home">Home</a>
       <a href="#" class="click" data-target="2018">38.Floßgrabenlauf</a>
-      <a href="#" class="click" data-target="Toby">Toby</a>
+      <a href="#" class="click" data-target="Tweet">Tweet</a>
       <a href="#" class="click" data-target="Historie">Historie</a>
       <a href="#" class="click" data-target="Links">Links</a>
       <a href="#" class="click" data-target="Kontakt">Impressum</a>
