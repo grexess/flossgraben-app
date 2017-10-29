@@ -1,0 +1,14 @@
+<template name="tweets">
+    <h3>Tweets</h3>
+    <ul>
+        {{#each tweets}}
+        <li>[{{createdAt}}] {{author}}: {{comment}} </li>
+        {{/each}}
+    </ul>
+    <div>Hier könnt Ihr Eure Tweets (Fragen/Kommentare/Wünsche/Kritiken) hinterlassen.</div>
+    <input type="text" placeholder="Was gibt es hier zu hinterlassen?* (max. 140 Zeichen)" id="comment" name="comment" class="validateComment"
+        pattern=".{3,}" size="140" maxlength="140">
+    <input type="text" placeholder="Von wem?* (max. 30 Zeichen)" id="author" name="author" class="validateComment" pattern=".{3,}"
+        size="30" maxlength="30">
+    <input id="submitComment" type="submit" value="Raus damit!">
+</template>

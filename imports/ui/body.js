@@ -1,132 +1,119 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ReactiveDict } from 'meteor/reactive-dict';
 import dataTablesBootstrap from 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';
 dataTablesBootstrap(window, $);
 
-import { Runners } from '../api/runners.js';
 import { Tweets } from '../api/tweets.js';
+import { Runners } from '../api/runners.js';
 
-import '../api/dataTable.js';
+import '../api/datatable.js';
 
-import './runner.js';
-import './birthSelection.js';
+import './templates/tweets.html';
+import './templates/impressum.html';
+import './templates/register.html';
+import './templates/links.html';
+import './templates/historie.html';
+import './templates/fakten.html';
+import './templates/footer.html';
+import './templates/birthSelection.html';
 import './body.html';
 
+Template.tweets.helpers({
+    tweets() {
+        return Tweets.find({});
+    }
+});
 
-function calculateGroup(day, month, year, gender) {
+Template.body.helpers({
+    runners() {
+		return Runners.find({});
+    },
+	runnersCount: function () {
+		return Runners.find().count();
+	},
+    tweets() {
+        return Tweets.find({});
+    }
+});
 
-	var group = gender;
-	var today = new Date();
-	var birthday = new Date(year, month - 1, day);
-	var differenceInMilisecond = today.valueOf() - birthday.valueOf();
-	var year_age = Math.floor(differenceInMilisecond / 31536000000);
-	return group + "-" + year_age;
-}
-
-Template.body.onCreated(function bodyOnCreated() {
+Template.register.helpers({
+    runners() {
+		return Runners.find({});
+	}
 });
 
 Template.body.events({
 
-	//submit a new runner
-	'click #submitBtn': function (event, instance) {
+    //submit a new runner
+    'click #submitBtn': function (event, instance) {
 
-		event.preventDefault();
+        event.preventDefault();
 
-		if (validateForm()) {
+        if (validateRegisterForm()) {
 
-			const gender = instance.$('input[name="gender"]:checked').val();
-			const birthday = instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val();
-			const group = calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender);
+            const gender = instance.$('input[name="gender"]:checked').val();
+            const birthday = instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val();
+            const group = calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender);
 
-			Runners.insert({
-				firstName: instance.$('#firstName').val(),
-				lastName: instance.$('#lastName').val(),
-				club: instance.$('#club').val(),
-				gender: gender,
-				birthday: birthday,
-				group: group
-			});
-			//update counter fields
-			instance.$('#count1').text("(" + Runners.find().count() + ")");
-			instance.$('#count2').text(Runners.find().count());
-		}
-	},
+            Runners.insert({
+                firstName: instance.$('#firstName').val(),
+                lastName: instance.$('#lastName').val(),
+                club: instance.$('#club').val(),
+                gender: gender,
+                birthday: birthday,
+                group: group
+            });
+            //update counter fields
+            instance.$('#count1').text("(" + Runners.find().count() + ")");
+            instance.$('#count2').text(Runners.find().count());
+        }
+    },
 
-	//submit a new tweet
-	'click #submitComment': function (event, instance) {
+    //submit a new tweet
+    'click #submitComment': function (event, instance) {
 
-		Tweets.insert({
-			comment: instance.$('#comment').val(),
-			author: instance.$('#author').val()
-		});
 
-		instance.$('#comment').val("");
-		instance.$('#author').val("");
-	}
+        validateTweetInput(instance.$('#comment'));
+        validateTweetInput(instance.$('#author'));
 
+        if (validateTweetInput(instance.$('#comment')) && validateTweetInput(instance.$('#author'))) {
+
+            Tweets.insert({
+                comment: instance.$('#comment').val(),
+                author: instance.$('#author').val(),
+                createdAt: new Date()
+            });
+
+            instance.$('#comment').val("");
+            instance.$('#author').val("");
+        }
+    }
 });
 
-Template.thisYear.onCreated(function bodyOnCreated() {
-	Meteor.subscribe('runners');
-});
+function validateTweetInput(field) {
+    if (field.val().length < 3) {
+        field.addClass("errorField");
+        field.on('click', function () {
+            field.removeClass("errorField");
+        });
+        return false;
+    } else {
+        field.removeClass("errorField");
+        return true;
+    }
+}
 
-Template.body.helpers({
-	runners() {
-		return Runners.find({});
-	},
-	runnersCount: function () {
-		return Runners.find().count();
-	}
-});
+function calculateGroup(day, month, year, gender) {
+    
+        var group = gender;
+        var today = new Date();
+        var birthday = new Date(year, month - 1, day);
+        var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+        var year_age = Math.floor(differenceInMilisecond / 31536000000);
+        return group + "-" + year_age;
+    }
 
-Template.myFrame.onRendered(function(){
-	
-	   this.autorun(function(){
-		 Template.currentData();
-	   });
-	
-	});
-
-Template.myFrame.helpers({
-	tweets() {
-		return Tweets.find({});
-	}
-});
-
-Template.thisYear.helpers({
-	runners() {
-		return Runners.find({});
-
-	},
-	runnersCount: function () {
-		return Runners.find().count()
-	}
-});
-
-Template.registerform.events({
-
-	'submit .addRunnerForm': function (event) {
-		// Prevent default browser form submit
-		event.preventDefault();
-
-		// Get value from form element
-		//var name = event.target.textbox1.value;
-
-		alert('name');
-	},
-
-	'click': function (event, templ) {
-
-		event.preventDefault();
-		alert('Click');
-	}
-
-});
-
-function validateForm() {
+function validateRegisterForm() {
 	isOkay = true;
 
 	if ($('#firstName').val().length < 3) {
@@ -203,3 +190,4 @@ function validateForm() {
 
 	return isOkay;
 }
+

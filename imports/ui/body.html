@@ -1,371 +1,83 @@
 <body>
-  {{> myFrame}}
-</body>
+    <!-- Sidebar (hidden by default) -->
+    <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px"
+        id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Menü schliessen</a>
+        <a href="#2018" onclick="w3_close()" class="w3-bar-item w3-button">Flossgrabenlauf 2018</a>
+        <a href="#register" onclick="w3_close()" class="w3-bar-item w3-button">Anmeldung</a>
+        <a href="#historie" onclick="w3_close()" class="w3-bar-item w3-button">Historie</a>
+        <a href="#links" onclick="w3_close()" class="w3-bar-item w3-button">Links</a>
+        <a href="#footer" onclick="w3_close()" class="w3-bar-item w3-button">Impressum</a>
+        <a href="#footer" onclick="w3_close()" class="w3-bar-item w3-button">Tweets</a>
+    </nav>
 
-<template name="myFrame">
-
-  {{> header}}
-
-  <!-- content area -->
-  <div class="all">
-    <div class="container">
-      <div class="secondNav">
-      </div>
-      <div class="content">
-      </div>
-      <div class="right"></div>
-    </div>
-  </div>
-  <!-- Home-->
-  <div id="Home-SecondNav" class="contentDiv">
-  </div>
-  <div id="Home-Content" class="contentDiv">
-    <div class="teaser1">Wenn Frau Holle fleißig ist, wird am
-      <br>
-      <br>
-      <b>Samstag, den 27. Januar 2018</b>
-      <br>
-      <br>der
-      <br>
-      <br>
-      <b>
-        <div class="mainLink">
-          <a href="#" class="mainClick" data-target="2018">38. Floßgrabenlauf</a>
+    <!-- Top menu -->
+    <div class="w3-top">
+        <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+            <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+            <!--<div class="w3-right w3-padding-16">Kontakt</div> -->
+            <div class="w3-center w3-padding-16">Flossgrabenlauf Cämmerswalde</div>
         </div>
-      </b>
-      <br>
-      <br> in Cämmerswalde stattfinden.
-      <br>
-      <br>
-      <p id="countdown"></p>
-    </div>
-  </div>
-
-  {{> thisYear}}
-
-
-  <!-- y -->
-  <div id="Tweet-SecondNav" class="contentDiv">
-  </div>
-  <div id="Tweet-Content" class="contentDiv">
-    <div class="comments">
-    Hier könnt Ihr Eure Tweets (Kommentare/Wünsche/Kritiken) hinterlassen. Ist aber erstmal nur ein "Test-Ballon"!
-    </div>  
-    <div class="half leftForm cf">
-    <input type="text" placeholder="Was gibt es hier zu hinterlassen?* (max. 140 Zeichen)" id="comment" name="comment" class="validateComment" pattern=".{3,}" size="140" maxlength="140">
-    </div>
-    <div class="half rigthForm cf">
-    <input type="text" placeholder="Von wem?* (max. 30 Zeichen)" id="author" name="author" class="validateComment" pattern=".{3,}" size="30" maxlength="30">
-  </div>  
-    <input id="submitComment" type="submit" value="Raus damit!">
-
-    <div class="tweetList">
-        <ul>
-            {{#each tweets}}
-            <li>({{text}}) {{comment}} </li>
-            {{/each}}
-          </ul>
     </div>
 
-  </div>
-  <!-- Historie -->
-  <div id="Historie-SecondNav" class="contentDiv">
-  </div>
-  <div id="Historie-Content" class="contentDiv">
-    <table class="centeredTable">
-      <tbody>
-        <tr>
-          <th>
-            <strong>Jahr</strong>
-          </th>
-          <th>
-            <strong>Ergebnisse</strong>
-          </th>
-        </tr>
-        <tr>
-          <td>2017</td>
-          <td>
-            <a href="https://www.flossgraben.run/app/download/8963186/28_01_2017+37.+Flossgrabenlauf+Ergebnisliste_FGL17.pdf" target="_blank">37. Flossgrabenlauf (PDF-Dokument [418.6 KB])</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <!-- !PAGE CONTENT! -->
 
+    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
-  {{> Links}} {{> Kontakt}} 
-  
-  <!--
-  {{> footer}}
-  -->
-</template>
+        <div class="w3-center w3-content w3-padding">
+            Wenn Frau Holle fleißig ist, wird am
+            <br>
+            <b>Samstag, den 27. Januar 2018</b>
+            <br>der
+            <br>
+            <b>
+                <a href="#2018">
+                    <h1>38. Floßgrabenlauf</h1>
+                </a>
+            </b>
+            <br>in
+            <br>
+            <b>Cämmerswalde</b>
+            <br>stattfinden.<br><br>
+            <p id="countdown"></p>
+            <p>Bisher haben sich schon <a href="#register">{{runnersCount}} Läufer</a> angemeldet</p>
+        </div>
+        <hr id="2018">
+        <div class="w3-center w3-content w3-padding">
+            <h3>Flossgrabenlauf 2018</h3>
+        </div>
+        {{> fakten}}
 
-<!--  ###############    database section ###############  -->
-
-<template name="runnerTemplate">
-  <li>{{text}}</li>
-</template>
-
-<!--  ###############    Static template section ###############  -->
-
-<template name="registerform">
-  <form id="addRunnerForm">
-    <div class="half leftForm cf">
-      <input type="text" placeholder="Dein Vorname*" id="firstName" name="firstName" class="validate">
-      <input type="email" placeholder="Deine eMail-Adresse*" id="eMail" name="eMail" class="validate">
-
-    </div>
-    <div class="half rightForm cf">
-      <input type="text" placeholder="Dein Nachname*" id="lastName" name="lastName" class="validate">
-      <input type="text" placeholder="Dein Verein" id="club" name="club">
-    </div>
-    <div class="birth">
-      <div class="innerBirth">
-        <fieldset id="gender" class="validate">
-          <input type="radio" name="gender" value="male">
-          <label for="mc">Mädchen</label>
-          <input type="radio" name="gender" value="female">
-          <label for="mc">Junge</label>
-        </fieldset>
-        {{> birthSelection }}</div>
-    </div>
-    <input id="submitBtn" type="submit" value="Ich will mitlaufen!">
-  </form>
-</template>
-
-
-<template name="thisYear">
-  <!-- 2018 -->
-  <div id="2018-SecondNav" class="contentDiv">
-    <ul class="secondNavList">
-      <li>
-        <a class="clickSecNav secondNavListActive" href="#" data-target="2018-Details">Details</a>
-      </li>
-      <li>
-        <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Registrierung">Anmeldung</a>
-      </li>
-      <li>
-        <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Runners">Teilnehmerliste
-          <span id="count1">({{runnersCount}})</span>
-        </a>
-      </li>
-      <li>
-        <a class="clickSecNav secondNavListInactive" href="#" data-target="2018-Strecke">Strecke</a>
-      </li>
-    </ul>
-  </div>
-  <div id="2018-Content" class="contentDiv">
-  </div>
-  <div id="2018-Details" class="contentDiv">
-
-
-    <div class="mainDetails">
-      <div class="half leftForm cf">
-        <ul class="ulItem">
-          <li class="liItem">
-            <p class="leftSym">&#127960;</p>
-            <p class="header1">Veranstaltungsort</p>
-            <p class="content1">09544 Cämmerswalde, unterhalb des "Ringel" bei Weißbach</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#x26D1;</p>
-            <p class="header1">Veranstalter</p>
-            <p class="content1">SV „Eintracht“ Cämmerswalde, Abteilung Ski, Barbara Müller, b.mueller.sport@freenet.de</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#128336;</p>
-            <p class="header1">Start</p>
-            <p class="content1">13:30 Uhr, Massenstart, getrennt nach Altersklassen und Geschlecht</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#x26A7;</p>
-            <p class="header1">Altersklassen</p>
-            <p class="content1">Vorschulalter bis Männer und Damen über jeweils 0,5 km bis 15 km</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#9975;</p>
-            <p class="header1">Laufstil</p>
-            <p class="content1">klassisch</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#x2714;</p>
-            <p class="header1">Anmeldung</p>
-            <p class="content1">b.mueller.sport@freenet.de oder hier auf der Seite</p>
-          </li>
-        </ul>
-      </div>
-      <div class="half leftForm cf">
-        <ul class="ulItem">
-          <li class="liItem">
-            <p class="leftSym">&#x260E;</p>
-            <p class="header1">Anschrift Org.- Büro</p>
-            <p class="content1">Barbara Müller, Muldentalstr. 59, OT Holzhau, 09623 Rechenberg-Bienenmühle 037327/ 9747 bzw. 017678928100 b.mueller.sport@freenet.de
-            </p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#128184;</p>
-            <p class="header1">Startgebühr</p>
-            <p class="content1">Erwachsene und Junioren pro Teilnehmer 4,00 Euro Jugend (AK 16- 18) 3,00 Euro AK 15 und jünger 2,00 Euro
-            </p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#9982;</p>
-            <p class="header1">Verpflegung</p>
-            <p class="content1">Ist am „Kiosk“ auf Kosten der Teilnehmer möglich</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#x265B;</p>
-            <p class="header1">Auszeichnung</p>
-            <p class="content1">1 - 3. Platz je AK erhalten eine Urkunde</p>
-          </li>
-
-          <li class="liItem">
-            <p class="leftSym">&#x2656;</p>
-            <p class="header1">Wanderpokal</p>
-            <p class="content1">Damen 5km /Herren 15 km</p>
-          </li>
-
-        </ul>
+        <!-- Pagination 
+    <div class="w3-center w3-padding-32">
+      <div class="w3-bar">
+        <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+        <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+        <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+        <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+        <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+        <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
       </div>
     </div>
+    -->
 
-  </div>
-  <div id="2018-Registrierung" class="contentDiv">
-    <p id="participants">Bisher haben sich schon
-      <span id="count2" class="markedText">{{runnersCount}}</span> Teilnehmer angemeldet</p>
+        <hr id="register">
+        <div class="w3-container w3-padding-32 w3-center">
+                {{> register}}
+        </div>
 
-    {{> registerform}}
+        <hr id="historie">
+        <div class="w3-container w3-padding-32 w3-center">
+            {{> historie}}
+        </div>
 
-  </div>
+        <hr id="links">
+        <div class="w3-container w3-padding-32 w3-center">
+            {{> links}}
+        </div>
 
-  <div id="2018-Runners" class="contentDiv">
-    <div class="runnersTable">
-      {{> tabular table=TabularTables.Runners class="table table-striped table-bordered table-condensed"}}
-    </div>          
-  </div>
+        {{> footer}}
 
-  <div id="2018-Strecke" class="contentDiv">Strecke</div>
-
-</template>
-
-<template name="Links">
-  <!-- Links -->
-  <div id="Links-SecondNav" class="contentDiv">
-  </div>
-  <div id="Links-Content" class="contentDiv">
-    <table class="centeredTable">
-      <tbody>
-        <tr>
-          <th>
-            <strong>Quelle</strong>
-          </th>
-          <th>
-            <strong>Kuckst Du</strong>
-          </th>
-        </tr>
-        <tr>
-          <td>www.erzgebirgsdorf.de</td>
-          <td>
-            <a href="https://www.erzgebirgsdorf.de/flossgraben.htm" target="_blank">historisches Hintergrundwissen zum Floßgraben</a>
-          </td>
-        </tr>
-        <tr>
-          <td>Video von Kanal9</td>
-          <td>
-            <p>
-              <a href="http://www.kanal9.de/index.php/beitraege-online/video/798-flossgrabenlauf-in-caemmerswalde-2017" target="_blank">Floßgrabenlauf in Cämmerswalde 2017 im Fernsehen</a>
-            </p>
-          </td>
-        </tr>
-        <tr>
-          <td>www.paranomia.de</td>
-          <td>
-            <a href="http://www.paranomia.de/video-2/zieleinlauf-tandem-skilanglauf-29012011.webm" target="_blank">Zieleinlauf&nbsp; Flossgrabenlauf 2017</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</template>
-
-<template name="Kontakt">
-  <div id="Kontakt-Content" class="contentDiv">
-    <div class="impressum">
-      <div class="header1">Impressum</div>
-      <div class="header1">Angaben gem&auml;&szlig; &sect; 5 TMG:</div>
-      <p class="content1">Gregor Schumann
-        <br> Wilhelm-Franke-Strasse 50
-        <br> 01219 Dresden</p>
-      <div class="header1">Kontakt:</div>
-      <p class="content1">
-        Telefon: +49 351 311567 5
-        <br /> E-Mail: grexess@googlemail.com
-      </p>
-      <div class="header1">Haftung f&uuml;r Inhalte</div>
-      <p class="content1">Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen Seiten nach den
-        allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
-        &uuml;bermittelte oder gespeicherte fremde Informationen zu &uuml;berwachen oder nach Umst&auml;nden zu forschen,
-        die auf eine rechtswidrige T&auml;tigkeit hinweisen.</p>
-      <p class="content1">
-        Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon
-        unber&uuml;hrt. Eine diesbez&uuml;gliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung
-        m&ouml;glich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
-      <div class="header1">Haftung f&uuml;r Links</div>
-      <p class="content1">Unser Angebot enth&auml;lt Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb
-        k&ouml;nnen wir f&uuml;r diese fremden Inhalte auch keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte der verlinkten
-        Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum
-        Zeitpunkt der Verlinkung auf m&ouml;gliche Rechtsverst&ouml;&szlig;e &uuml;berpr&uuml;ft. Rechtswidrige Inhalte waren
-        zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
-      <p class="content1">Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung
-        nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-      <div class="header1">
-        Urheberrecht</div>
-      <p class="content1">Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
-        Die Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechtes
-        bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite
-        sind nur f&uuml;r den privaten, nicht kommerziellen Gebrauch gestattet.</p>
-      <p class="content1">Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet.
-        Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung
-        aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir
-        derartige Inhalte umgehend entfernen.</p>
-      <p class="content1">Quelle:
-        <a href="https://www.e-
-recht24.de/impressum-generator.html">https://www.e-recht24.de/impressum-generator.html</a>
-      </p>
+        <!-- End page content -->
     </div>
-  </div>
-  <div id="Kontakt-SecondNav" class="contentDiv">
-  </div>
-</template>
-
-<template name="header">
-  <div class="center">
-    <div>
-      <img src="https://my.flossgraben.run/images/header.png" alt="Cämmerswalde 2018" style="width:75vw">
-    </div>
-    <!-- horizontal navigation -->
-    <div class="topnav" id="myTopnav">
-      <a href="#" class="click active1" data-target="Home">Home</a>
-      <a href="#" class="click" data-target="2018">38.Floßgrabenlauf</a>
-      <a href="#" class="click" data-target="Tweet">Tweet</a>
-      <a href="#" class="click" data-target="Historie">Historie</a>
-      <a href="#" class="click" data-target="Links">Links</a>
-      <a href="#" class="click" data-target="Kontakt">Impressum</a>
-      <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
-    </div>
-  </div>
-</template>
-
-<template name="footer">
-  <div class="footer">
-    Sport frei!
-  </div>
-</template>
+</body>
