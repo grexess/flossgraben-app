@@ -14,7 +14,7 @@ new Tabular.Table({
       {data: "group", title: "Altersklasse"}
     ],
     paging: false,
-    scrollY:400,
+    scrollY:"100%",
     searching: false,
     info: false,
     ordering: false

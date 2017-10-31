@@ -1,7 +1,12 @@
 import '../imports/ui/body.js';
 
 $(document).ready(function () {
-    countDown();
+		countDown();
+		
+	$(".ss-icon-left").click(function(){galleryspin("-");});
+	$(".ss-icon-right").click(function(){galleryspin();});
+	window.setInterval(galleryspin, 3000);
+
   });
 /*
 Template.hello.onCreated(function helloOnCreated() {
@@ -53,3 +58,11 @@ function countDown() {
 			}
 		}, 1000);
 }
+
+	//carousel
+	var angle = 0;
+	function galleryspin(sign) { 
+	spinner = document.querySelector("#spinner");
+	if (!sign) { angle = angle + 45; } else { angle = angle - 45; }
+	spinner.setAttribute("style","-webkit-transform: rotateY("+ angle +"deg); -moz-transform: rotateY("+ angle +"deg); transform: rotateY("+ angle +"deg);");
+	}

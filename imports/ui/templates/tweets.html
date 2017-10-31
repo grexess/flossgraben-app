@@ -2,7 +2,7 @@
     <h3>Tweets</h3>
     <ul>
         {{#each tweets}}
-        <li>[{{createdAt}}] {{author}}: {{comment}} </li>
+        <li>[{{formatDate createdAt}}] {{author}}: {{comment}} </li>
         {{/each}}
     </ul>
     <div>Hier könnt Ihr Eure Tweets (Fragen/Kommentare/Wünsche/Kritiken) hinterlassen.</div>

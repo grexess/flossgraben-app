@@ -99,3 +99,113 @@ input[type=email] {
     flex-wrap: nowrap;              /* default value; can be omitted */
     justify-content: space-between; /* switched from default (flex-start, see below) */
   }
+
+  .container01 {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content: center; /* switched from default (flex-start, see below) */
+  }
+
+  .month{
+    margin: 0 5% 0;
+  }
+
+  /* background picture + blur */
+ .main {
+    background-size: cover;
+    width:100%;
+    height:100%;
+    position:relative;
+    z-index: -2;
+  }
+
+  
+.blur {
+   background-size: cover;
+  overflow: hidden;
+  filter: blur(10px);
+  position: absolute;
+  /*height: 300px;*/
+  top: 20%;
+  left: 20%;
+  right: 20%;
+  bottom: 13%;
+  z-index: -1;
+  box-shadow: inset 0 0 0 200px rgba(255,255,255,0.5);
+}
+
+.pic01{
+  background: url('/images/winter.jpg') no-repeat center center fixed; 
+}
+
+.pic02{
+  background: url('/images/skiing.jpg') no-repeat center center fixed; 
+}
+
+
+
+.widget {
+  border-top: 2px solid rgba(255, 255, 255, .5);
+  border-bottom: 2px solid rgba(255, 255, 255, .5);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.blurPadding{
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+
+  .center1 {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* carousel*/
+  div#carousel { 
+  perspective: 1200px; 
+  background: #fff; 
+  padding-top: 3%; 
+  font-size:0; 
+  margin-bottom: 3rem; 
+  overflow: hidden; 
+}
+figure#spinner { 
+  transform-style: preserve-3d; 
+  height: 300px; 
+  transform-origin: 50% 50% -500px; 
+  transition: 1s; 
+} 
+figure#spinner img { 
+  width: 40%; max-width: 425px; 
+  position: absolute; left: 30%;
+  transform-origin: 50% 50% -500px;
+  outline:1px solid transparent; 
+}
+figure#spinner img:nth-child(1) { transform:rotateY(0deg); 
+}
+figure#spinner img:nth-child(2) { transform: rotateY(-45deg); }
+figure#spinner img:nth-child(3) { transform: rotateY(-90deg); }
+figure#spinner img:nth-child(4) { transform: rotateY(-135deg); }
+figure#spinner img:nth-child(5){ transform: rotateY(-180deg); }
+figure#spinner img:nth-child(6){ transform: rotateY(-225deg); }
+figure#spinner img:nth-child(7){ transform: rotateY(-270deg); }
+figure#spinner img:nth-child(8){ transform: rotateY(-315deg); }
+div#carousel ~ span { 
+  color: #8c8c8c; 
+  margin: 5%; 
+  display: inline-block; 
+  text-decoration: none; 
+  font-size: 2rem; 
+  transition: 0.6s color; 
+  position: relative; 
+  margin-top: -6rem; 
+  border-bottom: none; 
+  line-height: 0; }
+div#carousel ~ span:hover { color: #888; cursor: pointer; }

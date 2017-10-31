@@ -1,4 +1,5 @@
 <body>
+
     <!-- Sidebar (hidden by default) -->
     <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px"
         id="mySidebar">
@@ -22,7 +23,13 @@
 
     <!-- !PAGE CONTENT! -->
 
+
     <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+
+
+        <div class="w3-container w3-center">
+            <img src="https://my.flossgraben.run/images/header.png" alt="Header" style="width:100%">
+        </div>
 
         <div class="w3-center w3-content w3-padding">
             Wenn Frau Holle fleißig ist, wird am
@@ -38,10 +45,19 @@
             <br>in
             <br>
             <b>Cämmerswalde</b>
-            <br>stattfinden.<br><br>
+            <br>stattfinden.
+            <br>
+            <br>
             <p id="countdown"></p>
-            <p>Bisher haben sich schon <a href="#register">{{runnersCount}} Läufer</a> angemeldet</p>
+            <p>Bisher haben sich schon
+                <a href="#register">{{runnersCount}} Läufer</a> angemeldet</p>
         </div>
+
+        <hr id="pictures">
+        <div class="w3-center w3-content w3-padding">
+        </div>
+        {{> carousel}}
+       
         <hr id="2018">
         <div class="w3-center w3-content w3-padding">
             <h3>Flossgrabenlauf 2018</h3>
@@ -63,19 +79,32 @@
 
         <hr id="register">
         <div class="w3-container w3-padding-32 w3-center">
-                {{> register}}
+            {{> register}}
         </div>
 
         <hr id="historie">
         <div class="w3-container w3-padding-32 w3-center">
-            {{> historie}}
+            <div class="main pic01">
+                <div class="widget center">
+                    <div class="blur pic01"></div>
+                    <div class="blurPadding">
+                        {{> historie}}
+                    </div>
+                </div>
+            </div>
         </div>
 
         <hr id="links">
         <div class="w3-container w3-padding-32 w3-center">
-            {{> links}}
+            <div class="main pic02">
+                <div class="widget center">
+                    <div class="blur pic02"></div>
+                    <div class="blurPadding">
+                        {{> links}}
+                    </div>
+                </div>
+            </div>
         </div>
-
         {{> footer}}
 
         <!-- End page content -->

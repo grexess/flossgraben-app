@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import moment from 'moment';
 import dataTablesBootstrap from 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';
 dataTablesBootstrap(window, $);
@@ -16,6 +17,7 @@ import './templates/historie.html';
 import './templates/fakten.html';
 import './templates/footer.html';
 import './templates/birthSelection.html';
+import './templates/carousel.html';
 import './body.html';
 
 Template.tweets.helpers({
@@ -51,17 +53,18 @@ Template.body.events({
 
         if (validateRegisterForm()) {
 
-            const gender = instance.$('input[name="gender"]:checked').val();
-            const birthday = instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val();
-            const group = calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender);
+            const gender = htmlEscape(instance.$('input[name="gender"]:checked').val());
+            const birthday = htmlEscape(instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val());
+            const group = htmlEscape(calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender));
 
             Runners.insert({
-                firstName: instance.$('#firstName').val(),
-                lastName: instance.$('#lastName').val(),
-                club: instance.$('#club').val(),
+                firstName: htmlEscape(instance.$('#firstName').val()),
+                lastName: htmlEscape(instance.$('#lastName').val()),
+                club: htmlEscape(instance.$('#club').val()),
                 gender: gender,
                 birthday: birthday,
-                group: group
+				group: group,
+				createdAt: new Date()
             });
             //update counter fields
             instance.$('#count1').text("(" + Runners.find().count() + ")");
@@ -89,6 +92,10 @@ Template.body.events({
         }
     }
 });
+
+Template.registerHelper('formatDate', function(date) {
+	return moment(date).format('DD.MM.YYYY');
+  });
 
 function validateTweetInput(field) {
     if (field.val().length < 3) {
@@ -190,4 +197,15 @@ function validateRegisterForm() {
 
 	return isOkay;
 }
+
+function htmlEscape(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+
 
