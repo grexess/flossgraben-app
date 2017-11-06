@@ -1,0 +1,105 @@
+<template name="start">
+        <!-- Sidebar (hidden by default) -->
+        <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left w3-round-large" style="display:none;z-index:2;width:40%;min-width:300px"
+            id="mySidebar">
+            <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item  myMenu">Menü schliessen</a>
+            <a href="#2018" onclick="w3_close()" class="w3-bar-item  myMenu">Flossgrabenlauf 2018</a>
+            <a href="#register" onclick="w3_close()" class="w3-bar-item  myMenu">Anmeldung</a>
+            <a href="#historie" onclick="w3_close()" class="w3-bar-item  myMenu">Historie</a>
+            <a href="#links" onclick="w3_close()" class="w3-bar-item  myMenu">Links</a>
+            <a href="#footer" onclick="w3_close()" class="w3-bar-item  myMenu">Impressum</a>
+            <a href="#footer" onclick="w3_close()" class="w3-bar-item  myMenu">Tweets</a>
+        </nav>
+    
+        <!-- Top menu -->
+        <div class="w3-top ">
+            <div class="w3 w3-mygreen w3-xlarge w3-round-large" style="max-width:1200px;margin:auto">
+                <div class="w3-button w3-padding-16 w3-left w3-round-large" onclick="w3_open()">☰</div>
+                <!--<div class="w3-right w3-padding-16">Kontakt</div> -->
+                <div class="w3-center w3-padding-16 w3-round-large">Flossgrabenlauf Cämmerswalde</div>
+            </div>
+        </div>
+    
+        <!-- !PAGE CONTENT! -->
+    
+    
+        <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+            <div class="w3-center w3-content w3-padding">
+                <div class="w3-round-xxlarge snow">
+                    <br>
+                    Wenn Frau Holle fleißig ist, wird am <b>Samstag, dem 27. Januar 2018</b> der
+                    <br>
+                    <b>
+                        <a href="#2018">
+                            <h1 class="headerline">38. Flossgrabenlauf</h1>
+                        </a>
+                    </b>in
+                    <b>Cämmerswalde</b> stattfinden.
+                </div>
+    
+                <div class="w3-container w3-center w3-round-xxlarge">
+                        <img src="/images/header.jpg" alt="Header" style="width:100%">
+                </div>
+    
+                <p id="countdown"></p>
+                <p>Bisher haben sich schon
+                    <a href="#register">{{runnersCount}} Läufer</a> angemeldet</p>
+            </div>
+    
+            <hr id="pictures">
+            <div class="w3-center w3-content w3-padding">
+                    {{> carousel}}
+            </div>
+    
+            <hr id="2018">
+            <div class="w3-center w3-content w3-padding">
+                <h3>Flossgrabenlauf 2018</h3>
+            </div>
+            {{> fakten}}
+    
+            <!-- Pagination 
+        <div class="w3-center w3-padding-32">
+          <div class="w3-bar">
+            <a href="#" class="w3-bar-item w3-button myMenu w3-hover-black">«</a>
+            <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+            <a href="#" class="w3-bar-item w3-button myMenu w3-hover-black">2</a>
+            <a href="#" class="w3-bar-item w3-button myMenu w3-hover-black">3</a>
+            <a href="#" class="w3-bar-item w3-button myMenu w3-hover-black">4</a>
+            <a href="#" class="w3-bar-item w3-button myMenu w3-hover-black">»</a>
+          </div>
+        </div>
+        -->
+    
+            <hr id="register">
+            <div class="w3-container w3-padding-32 w3-center">
+                {{> register}}
+            </div>
+    
+            <hr id="historie">
+            <div class="w3-container w3-padding-32 w3-center">
+                <div class="main pic01">
+                    <div class="widget center">
+                        <div class="blur pic01"></div>
+                        <div class="blurPadding">
+                            {{> historie}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <hr id="links">
+            <div class="w3-container w3-padding-32 w3-center">
+                <div class="main pic02">
+                    <div class="widget center">
+                        <div class="blur pic02"></div>
+                        <div class="blurPadding">
+                            {{> links}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{> footer}}
+    
+            <!-- End page content -->
+        </div>
+    </template>

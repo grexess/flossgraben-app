@@ -18,107 +18,124 @@ import './templates/fakten.html';
 import './templates/footer.html';
 import './templates/birthSelection.html';
 import './templates/carousel.html';
+import './templates/start.html';
+
+import './templates/private/private.html';
+
 import './body.html';
 
-Template.tweets.helpers({
-    tweets() {
-        return Tweets.find({});
-    }
+
+Router.route('/private');
+Router.route('/', {
+	template: 'start'
 });
 
-Template.body.helpers({
-    runners() {
-		return Runners.find({});
-    },
-	runnersCount: function () {
-		return Runners.find().count();
-	},
-    tweets() {
-        return Tweets.find({});
-    }
-});
+if (Meteor.isClient) {
 
-Template.register.helpers({
-    runners() {
-		return Runners.find({});
-	}
-});
+	Template.start.helpers({
+		runners() {
+			return Runners.find({});
+		},
+		runnersCount: function () {
+			return Runners.find().count();
+		},
+		tweets() {
+			return Tweets.find({});
+		}
+	});
 
-Template.body.events({
+	Template.register.helpers({
+		runners() {
+			return Runners.find({});
+		}
+	});
 
-    //submit a new runner
-    'click #submitBtn': function (event, instance) {
+	Template.tweets.helpers({
+		tweets() {
+			return Tweets.find({});
+		}
+	});
 
-        event.preventDefault();
+	Template.body.events({
 
-        if (validateRegisterForm()) {
+		//submit a new runner
+		'click #submitBtn': function (event, instance) {
 
-            const gender = htmlEscape(instance.$('input[name="gender"]:checked').val());
-            const birthday = htmlEscape(instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val());
-            const group = htmlEscape(calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender));
+			event.preventDefault();
 
-            Runners.insert({
-                firstName: htmlEscape(instance.$('#firstName').val()),
-                lastName: htmlEscape(instance.$('#lastName').val()),
-                club: htmlEscape(instance.$('#club').val()),
-                gender: gender,
-                birthday: birthday,
-				group: group,
-				createdAt: new Date()
-            });
-            //update counter fields
-            instance.$('#count1').text("(" + Runners.find().count() + ")");
-            instance.$('#count2').text(Runners.find().count());
-        }
-    },
+			if (validateRegisterForm()) {
 
-    //submit a new tweet
-    'click #submitComment': function (event, instance) {
+				const gender = htmlEscape(instance.$('input[name="gender"]:checked').val());
+				const birthday = htmlEscape(instance.$('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val());
+				const group = htmlEscape(calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender));
+
+				Runners.insert({
+					firstName: htmlEscape(instance.$('#firstName').val()),
+					lastName: htmlEscape(instance.$('#lastName').val()),
+					club: htmlEscape(instance.$('#club').val()),
+					gender: gender,
+					birthday: birthday,
+					group: group,
+					createdAt: new Date()
+				});
+				//update counter fields
+				instance.$('#count1').text("(" + Runners.find().count() + ")");
+				instance.$('#count2').text(Runners.find().count());
+			}
+		},
+
+		//submit a new tweet
+		'click #submitComment': function (event, instance) {
 
 
-        validateTweetInput(instance.$('#comment'));
-        validateTweetInput(instance.$('#author'));
+			validateTweetInput(instance.$('#comment'));
+			validateTweetInput(instance.$('#author'));
 
-        if (validateTweetInput(instance.$('#comment')) && validateTweetInput(instance.$('#author'))) {
+			if (validateTweetInput(instance.$('#comment')) && validateTweetInput(instance.$('#author'))) {
 
-            Tweets.insert({
-                comment: instance.$('#comment').val(),
-                author: instance.$('#author').val(),
-                createdAt: new Date()
-            });
+				Tweets.insert({
+					comment: instance.$('#comment').val(),
+					author: instance.$('#author').val(),
+					createdAt: new Date()
+				});
 
-            instance.$('#comment').val("");
-            instance.$('#author').val("");
-        }
-    }
-});
+				instance.$('#comment').val("");
+				instance.$('#author').val("");
+			}
+		}
+	});
 
-Template.registerHelper('formatDate', function(date) {
-	return moment(date).format('DD.MM.YYYY');
-  });
+	Template.registerHelper('formatDate', function (date) {
+		return moment(date).format('DD.MM.YYYY');
+	});
+
+	Meteor.subscribe('runners');
+	Meteor.subscribe('tweets');
+
+}
 
 function validateTweetInput(field) {
-    if (field.val().length < 3) {
-        field.addClass("errorField");
-        field.on('click', function () {
-            field.removeClass("errorField");
-        });
-        return false;
-    } else {
-        field.removeClass("errorField");
-        return true;
-    }
+	if (field.val().length < 3) {
+		field.addClass("errorField");
+		field.on('click', function () {
+			field.removeClass("errorField");
+		});
+		return false;
+	} else {
+		field.removeClass("errorField");
+		return true;
+	}
 }
 
 function calculateGroup(day, month, year, gender) {
-    
-        var group = gender;
-        var today = new Date();
-        var birthday = new Date(year, month - 1, day);
-        var differenceInMilisecond = today.valueOf() - birthday.valueOf();
-        var year_age = Math.floor(differenceInMilisecond / 31536000000);
-        return group + "-" + year_age;
-    }
+
+	var group = gender;
+	var today = new Date();
+	var birthday = new Date(year, month - 1, day);
+	var differenceInMilisecond = today.valueOf() - birthday.valueOf();
+	var year_age = Math.floor(differenceInMilisecond / 31536000000);
+	return group + "-" + year_age;
+}
 
 function validateRegisterForm() {
 	isOkay = true;
@@ -199,12 +216,12 @@ function validateRegisterForm() {
 }
 
 function htmlEscape(str) {
-    return str
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+	return str
+		.replace(/&/g, '&amp;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
 }
 
 
