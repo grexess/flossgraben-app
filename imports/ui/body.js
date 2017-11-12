@@ -24,12 +24,20 @@ import './templates/private/private.html';
 
 import './body.html';
 
+/*
+*  Routes
+*/
+Router.route('/private', {
+	template: 'private'
+});
 
-Router.route('/private');
 Router.route('/', {
 	template: 'start'
 });
 
+/*
+*  Client actions
+*/
 if (Meteor.isClient) {
 
 	Template.start.helpers({
@@ -56,7 +64,7 @@ if (Meteor.isClient) {
 		}
 	});
 
-	Template.body.events({
+	Template.start.events({
 
 		//submit a new runner
 		'click #submitBtn': function (event, instance) {
@@ -87,7 +95,6 @@ if (Meteor.isClient) {
 		//submit a new tweet
 		'click #submitComment': function (event, instance) {
 
-
 			validateTweetInput(instance.$('#comment'));
 			validateTweetInput(instance.$('#author'));
 
@@ -111,8 +118,10 @@ if (Meteor.isClient) {
 
 	Meteor.subscribe('runners');
 	Meteor.subscribe('tweets');
-
 }
+
+/* Helper functions */
+
 
 function validateTweetInput(field) {
 	if (field.val().length < 3) {
@@ -223,6 +232,8 @@ function htmlEscape(str) {
 		.replace(/</g, '&lt;')
 		.replace(/>/g, '&gt;');
 }
+
+
 
 
 
