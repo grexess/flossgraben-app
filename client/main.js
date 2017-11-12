@@ -2,7 +2,19 @@ import '../imports/ui/body.js';
 
 $(document).ready(function () {
 		countDown();
+
+		var startDate = "Jan 27, 2018 13:30:00";
+		var huh  = new Date(startDate);
+		var duh  = new Date();
+		var wha  = huh.getTime()/1000 - duh.getTime()/1000;
 		
+		var clock = $('.your-clock').FlipClock(wha,{
+			countdown: true,
+			clockFace: 'DailyCounter',
+			defaultLanguage: 'de',
+			language: 'de'
+			});
+
 		$('.owl-carousel').owlCarousel({
 			loop: true,
 			lazyLoad: true,

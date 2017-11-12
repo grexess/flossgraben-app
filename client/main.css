@@ -253,6 +253,24 @@ input[type=email] {
   background: black;
 }
 
+.flip-clock {
+  display: inline-block;
+  width: auto;
+}
+
+.flip-clock-divider .flip-clock-label {
+  color: #4D9A56; 
+}
+
+.flip-clock-wrapper ul li a div div.inn{
+background-color: #4D9A56
+}
+
+
+.flip-clock-wrapper ul {
+  background: #4D9A56;
+}
+
 .carousel-cell {
   width: 70%;
   height: 200px;

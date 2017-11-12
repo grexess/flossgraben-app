@@ -4,6 +4,8 @@ import dataTablesBootstrap from 'datatables.net-bs';
 import 'datatables.net-bs/css/dataTables.bootstrap.css';
 dataTablesBootstrap(window, $);
 
+import FlipClock from 'meteor/modweb:flipclock';
+
 import { Tweets } from '../api/tweets.js';
 import { Runners } from '../api/runners.js';
 

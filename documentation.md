@@ -7,3 +7,8 @@
 	6) Build: npm install (maybe npm install --unsafe-perm)npm 
 	
 Restart App: restart flossgraben
+
+
+### FlipClock
+
+meteor add modweb:flipclock
