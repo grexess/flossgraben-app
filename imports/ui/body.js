@@ -66,8 +66,30 @@ if (Meteor.isClient) {
 		}
 	});
 
-	Template.start.events({
+	Template.links.events({
+		//link clicked
+		'click .myLink': function (event, instance) {
+			event.preventDefault();
+		}
+	});
 
+	Template.private.onCreated(function () {
+		$('[data-target="runners"]').addClass("w3-green");
+		$('#runners').show();
+	  });
+
+	Template.private.events({
+		'click .w3-button': function (event, instance) {
+			event.preventDefault();
+			instance.$('.prvCntDiv').hide();
+			instance.$('.navElem').removeClass("w3-green");
+			instance.$(event.currentTarget).addClass("w3-green");
+			instance.$('#'+ event.currentTarget.dataset.target).show();
+
+		}
+	});
+
+	Template.start.events({
 		//submit a new runner
 		'click #submitBtn': function (event, instance) {
 

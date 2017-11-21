@@ -1,7 +1,8 @@
 import '../imports/ui/body.js';
+import '../imports/startup/accounts-config.js';
 
 $(document).ready(function () {
-		countDown();
+		//countDown();
 
 		var startDate = "Jan 27, 2018 13:30:00";
 		var huh  = new Date(startDate);
