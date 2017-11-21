@@ -85,7 +85,11 @@ if (Meteor.isClient) {
 			instance.$('.navElem').removeClass("w3-green");
 			instance.$(event.currentTarget).addClass("w3-green");
 			instance.$('#'+ event.currentTarget.dataset.target).show();
+		},
 
+		'click .logout': function(event){
+			event.preventDefault();
+			Meteor.logout();
 		}
 	});
 
