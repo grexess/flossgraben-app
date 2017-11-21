@@ -73,6 +73,15 @@ if (Meteor.isClient) {
 		}
 	});
 
+	Template.private.helpers({
+		tweets() {
+			return Tweets.find({});
+		},
+		runners() {
+			return Runners.find({});
+		}
+	});
+
 	Template.private.onCreated(function () {
 		$('[data-target="runners"]').addClass("w3-green");
 		$('#runners').show();

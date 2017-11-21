@@ -1,33 +1,48 @@
 <template name="private">
+    <div class="privBody">
+        <div class="privContainer">
+            {{#if currentUser}}
 
-    {{#if currentUser}}
+            <div class="w3-bar w3-blue">
+                <a href="#" class="w3-bar-item w3-button w3-mobile navElem w3-green" data-target="runners">Show Runners</a>
+                <a href="#" class="w3-bar-item w3-button w3-mobile navElem" data-target="create">Create new User</a>
+                <a href="#" class="w3-bar-item w3-button w3-mobile navElem logout" data-target="logout">Logout</a>
+            </div>
 
-    <div class="w3-bar w3-blue">
-        <a href="#" class="w3-bar-item w3-button w3-mobile navElem w3-green" data-target="runners">Show Runners</a>
-        <a href="#" class="w3-bar-item w3-button w3-mobile navElem" data-target="create">Create new User</a>
-        <a href="#" class="w3-bar-item w3-button w3-mobile navElem logout" data-target="logout">Logout</a>
+            <div id="runners" class="prvCntDiv">
+                <h2>Tweets comes here</h2>
+                <ul>
+                    {{#each tweets}}
+                    <li>[{{formatDate createdAt}}] {{author}}: {{comment}} </li>
+                    {{/each}}
+                </ul>
+                <h2>Runners comes here</h2>
+                <ul>
+                    {{#each runners}}
+                    <li>{{firstName}} | {{lastName}} | {{eMail}} </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            <div id="create" class="prvCntDiv" style="display:none">
+                <form class="register">
+                    <p>Username:
+                        <input type="email" name="email">
+                    </p>
+                    <p>Password:
+                        <input type="password" name="password">
+                    </p>
+                    <p>
+                        <input type="submit" value="Register">
+                    </p>
+                </form>
+            </div>
+
+            <div id="logout" class="prvCntDiv" style="display:none">logout</div>
+
+            {{else}}
+            <div class="privBox">{{> loginButtons}}</div>
+            {{/if}}
+        </div>
     </div>
-
-    <div id="runners" class="prvCntDiv">Runners</div>
-
-    <div id="create" class="prvCntDiv" style="display:none">
-        <form class="register">
-            <p>Username:
-                <input type="email" name="email">
-            </p>
-            <p>Password:
-                <input type="password" name="password">
-            </p>
-            <p>
-                <input type="submit" value="Register">
-            </p>
-        </form>
-    </div>
-
-    <div id="logout" class="prvCntDiv" style="display:none">logout</div>
-
-    {{else}}
-    <div class="privBox">{{> loginButtons}}</div>
-    {{/if}}
-
 </template>
