@@ -23,6 +23,7 @@ import './templates/carousel.html';
 import './templates/start.html';
 
 import './templates/private/private.html';
+import './templates/private/login.html';
 
 import './body.html';
 
@@ -41,6 +42,15 @@ Router.route('/', {
 *  Client actions
 */
 if (Meteor.isClient) {
+
+	Template.login.events({
+		'submit form': function (event) {
+			event.preventDefault();
+			var emailVar = event.target.loginEmail.value;
+			var passwordVar = event.target.loginPassword.value;
+			Meteor.loginWithPassword(emailVar, passwordVar);
+		}
+	});
 
 	Template.start.helpers({
 		runners() {
@@ -79,13 +89,16 @@ if (Meteor.isClient) {
 		},
 		runners() {
 			return Runners.find({});
+		},
+		userlist() {
+			return Meteor.users.find({});
 		}
 	});
 
 	Template.private.onCreated(function () {
 		$('[data-target="runners"]').addClass("w3-green");
 		$('#runners').show();
-	  });
+	});
 
 	Template.private.events({
 		'click .w3-button': function (event, instance) {
@@ -93,10 +106,10 @@ if (Meteor.isClient) {
 			instance.$('.prvCntDiv').hide();
 			instance.$('.navElem').removeClass("w3-green");
 			instance.$(event.currentTarget).addClass("w3-green");
-			instance.$('#'+ event.currentTarget.dataset.target).show();
+			instance.$('#' + event.currentTarget.dataset.target).show();
 		},
 
-		'click .logout': function(event){
+		'click .logout': function (event) {
 			event.preventDefault();
 			Meteor.logout();
 		}
@@ -155,6 +168,7 @@ if (Meteor.isClient) {
 
 	Meteor.subscribe('runners');
 	Meteor.subscribe('tweets');
+	Meteor.subscribe('userlist');
 }
 
 /* Helper functions */

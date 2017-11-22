@@ -2,9 +2,6 @@ body{
   background-color: #fff
   }
 
-
-
-
   .privBody {
     font-family: sans-serif;
     background-color: #54d818;
@@ -25,11 +22,17 @@ body{
 
 
 .privContainer {
-  max-width: 600px;
+  max-width: 80%;
   margin: 0 auto;
   min-height: 100%;
   background: white;
 }
+
+.privLoginBox {
+  margin: 0 auto;
+  padding: 20%;
+}
+
 
 h1, h3, #mySidebar{
     color:#A9D0F5;
@@ -105,7 +108,7 @@ input[type=submit]:hover {
     background-color: #A9D0F5;
 }
 
-input[type=email] {
+input[type=email], input[type=password] {
     width: 100%;
      padding: 12px 20px;
      margin: 8px 0;
@@ -384,4 +387,18 @@ background-color: #A9D0F5
 @font-face {
   font-family: 'winter';
   src: url('/font/snowtt.ttf');
+}
+
+#tableList{
+  list-style: upper-greek;
+  margin: 1%;
+}
+
+#tableList li div {
+  display:block;
+  float:left;
+  padding-left: 2%;
+}
+#tableList li div.Col1, #tableList li div.Col1 {
+ width: 20%;
 }
