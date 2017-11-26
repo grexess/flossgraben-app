@@ -25,7 +25,7 @@ if (Meteor.isClient) {
             }
 
             if (action === "changeR") {
-
+                $('#overlay').show();
                 Bert.alert("Runner changed", 'info');
             }
 

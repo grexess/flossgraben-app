@@ -6,7 +6,7 @@ import '../imports/api/datatable.js';
 
 Meteor.startup(function () {
 
-    process.env.MAIL_URL = "smtp://administrator%40flossgraben.run:PA1uZ%25SOC0rF@smtp.1und1.de:587/";
+    process.env.MAIL_URL = "smtp://administrator%40flossgraben.run:ghfsdkghkxdgf@smtp.1und1.de:587/";
     console.log('set ' + process.env.MAIL_URL);
     /*
     Email.send({
