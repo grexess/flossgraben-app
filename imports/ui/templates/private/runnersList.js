@@ -20,18 +20,33 @@ if (Meteor.isClient) {
             var action = event.currentTarget.dataset.target;
 
             if (action === "deleteR") {
-                Meteor.call('runners.remove', selId);
-                Bert.alert("Runner removed", 'info');
+                if (selId) {
+                    Meteor.call('runners.remove', selId);
+                    Bert.alert("Runner removed", 'info');
+                }
+                else {
+                    Bert.alert("No Runner selected", 'danger');
+                }
             }
 
             if (action === "changeR") {
-                $('#overlay').show();
-                Bert.alert("Runner changed", 'info');
+                if (selId) {
+                    $('#overlay').show();
+                    Bert.alert("Runner changed", 'info');
+                }
+                else {
+                    Bert.alert("No Runner selected", 'danger');
+                }
             }
 
             if (action === "createR") {
-
+                $('#overlay').show();
                 Bert.alert("Runner created", 'info');
+            }
+
+            if (action === "cancelR") {
+                $('#overlay').hide();
+                Bert.alert("Action canceled", 'info');
             }
 
             /*
