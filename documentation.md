@@ -12,3 +12,7 @@ Restart App: restart flossgraben
 ### FlipClock
 
 meteor add modweb:flipclock
+### Bert
+meteor add themeteorchef:bert
+### Email
+meteor add email

@@ -1,0 +1,41 @@
+<template name="runnersList">
+
+    <div class="w3-container buttonRow">
+        <button class="w3-button w3-green evtBtn" data-target="createR">Create Runner</button>
+        <button class="w3-button w3-yellow evtBtn" data-target="changeR">Change Runner</button>
+        <button class="w3-button w3-red evtBtn" data-target="deleteR">Delete Runner</button>
+    </div>
+
+    <div class="rTableBox">
+        <div class="rTable">
+            <div class="rTableRow">
+                <div class="rTableHead"></div>
+                <div class="rTableHead">Vorname</div>
+                <div class="rTableHead">Nachname</div>
+                <div class="rTableHead">eMail</div>
+                <div class="rTableHead">Club</div>
+                <div class="rTableHead">m/w</div>
+                <div class="rTableHead">Altersklasse</div>
+                <div class="rTableHead">Geburtstag</div>
+            </div>
+
+            {{#each runners}}
+
+            <div class="rTableRow">
+                <div class="rTableCell rFirstCell">
+                    <input type="radio" name="nRunner" value="{{_id}}">
+                </div>
+                <div class="rTableCell">{{firstName}}</div>
+                <div class="rTableCell">{{lastName}}</div>
+                <div class="rTableCell">{{email}}</div>
+                <div class="rTableCell">{{club}}</div>
+                <div class="rTableCell">{{gender}}</div>
+                <div class="rTableCell">{{group}}</div>
+                <div class="rTableCell">{{birthday}}</div>
+            </div>
+
+            {{/each}}
+        </div>
+    </div>
+
+</template>

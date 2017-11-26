@@ -1,0 +1,26 @@
+.rTableBox{
+  padding: 2%;
+}
+
+.rTable { display: block; }
+.rTableRow { display: table-row;}
+.rTableHeading { display: table-header-group; }
+.rTableBody { display: table-row-group; }
+.rTableFoot { display: table-footer-group; }
+.rTableCell { 
+  display: table-cell; padding: 0px 5px;
+}
+
+.rFirstCell{ 
+  
+}
+
+.rTableHead{
+  padding: 0px 5px;
+  display: table-cell;
+  color: green;
+}
+
+.buttonRow{
+ margin-top: 5%
+}

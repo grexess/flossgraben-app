@@ -22,9 +22,7 @@ import './templates/birthSelection.html';
 import './templates/carousel.html';
 import './templates/start.html';
 
-import './templates/private/private.html';
-import './templates/private/login.html';
-
+import './templates/private/private.js';
 import './body.html';
 
 /*
@@ -34,15 +32,31 @@ Router.route('/private', {
 	template: 'private'
 });
 
+
+Router.route('/verify-email/:token', function () {
+	Accounts.verifyEmail(this.params.token, (error) => {
+		if (error) {
+			Bert.alert(error.reason, 'danger');
+		} else {
+			Router.go('/private');
+			Bert.alert('Email verified! Thanks!', 'success');
+		}
+	});
+  });
+
 Router.route('/', {
 	template: 'start'
 });
 
+if (Meteor.isServer) {
+
+}
 /*
 *  Client actions
 */
 if (Meteor.isClient) {
 
+	//user login
 	Template.login.events({
 		'submit form': function (event) {
 			event.preventDefault();
@@ -101,7 +115,7 @@ if (Meteor.isClient) {
 	});
 
 	Template.private.events({
-		'click .w3-button': function (event, instance) {
+		'click .navElem': function (event, instance) {
 			event.preventDefault();
 			instance.$('.prvCntDiv').hide();
 			instance.$('.navElem').removeClass("w3-green");

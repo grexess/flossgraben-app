@@ -8,3 +8,9 @@ if (Meteor.isServer) {
         return Runners.find({});
     });
 }
+
+Meteor.methods({
+    'runners.remove'(runnersId) {
+        Runners.remove(runnersId);
+    }
+});

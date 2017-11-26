@@ -1,9 +1,14 @@
 import { Accounts } from 'meteor/accounts-base';
 
 Accounts.ui.config({
- passwordSignupFields: 'USERNAME_ONLY',
+  passwordSignupFields: 'USERNAME_ONLY',
 });
 
 Accounts.config({
-    forbidClientAccountCreation : false
-  });
+  forbidClientAccountCreation: false,
+  sendVerificationEmail: false
+});
+
+Accounts.onLoginFailure(function (error) {
+  Bert.alert(error.error.reason, 'danger');
+});

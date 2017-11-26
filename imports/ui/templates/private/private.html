@@ -12,17 +12,9 @@
             </div>
 
             <div id="runners" class="prvCntDiv">
-                <h2>Runners comes here</h2>
-                <ul id="tableList">
-                    {{#each runners}}
-                    <li>
-                        <div class="Col1">{{firstName}}</div>
-                        <div>{{lastName}}</div>
-                        <div>{{eMail}}</div>
-                        <div>{{club}}</div>
-                    </li>
-                    {{/each}}
-                </ul>
+               
+                {{> runnersList}}
+
             </div>
 
             <div id="tweets" class="prvCntDiv" style="display:none">
@@ -36,26 +28,15 @@
 
             <div id="create" class="prvCntDiv" style="display:none">
 
-                <div class="privLoginBox">
-                    <form class="register">
-                        <p>Username:
-                            <input type="email" name="email">
-                        </p>
-                        <p>Password:
-                            <input type="password" name="password">
-                        </p>
-                        <p>
-                            <input type="submit" value="Register">
-                        </p>
-                    </form>
-                </div>
+                {{> createUser}}
+                
             </div>
 
             <div id="show" class="prvCntDiv" style="display:none">
                 <h2>Users comes here</h2>
                 <ul>
                     {{#each userlist}}
-                    <li>{{username}}</li>
+                    <li>{{username}} {{createdAt}}</li>
                     {{/each}}
                 </ul>
             </div>
