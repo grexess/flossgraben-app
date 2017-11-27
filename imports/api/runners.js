@@ -7,6 +7,13 @@ if (Meteor.isServer) {
     Meteor.publish('runners', function () {
         return Runners.find({});
     });
+
+    Runners.allow({
+		insert: function (userId, doc) {
+			return true;
+		}
+	});
+
 }
 
 Meteor.methods({

@@ -32,7 +32,15 @@ if (Meteor.isClient) {
             if (action === "changeR") {
                 if (selId) {
                     $('#overlay').show();
-                    Bert.alert("Runner changed", 'info');
+                    //set the values
+                    var record = Runners.find({"_id": selId}).fetch()[0];
+                    $('#firstName').val(record.firstName);
+                    $('#lastName').val(record.lastName);
+                    $('#club').val(record.club);
+
+                    
+
+                    $('#addRunnerForm')[0].reset();
                 }
                 else {
                     Bert.alert("No Runner selected", 'danger');
@@ -41,20 +49,43 @@ if (Meteor.isClient) {
 
             if (action === "createR") {
                 $('#overlay').show();
+            }
+
+            if (action === "createUser") {
+                
+				//const gender = Meteor.call('htmlEscape',{str: $('input[name="gender"]:checked').val()}());
+				//const birthday = Meteor.call('htmlEscape',{str: $('#dob-day :selected').val() + "." + instance.$('#dob-month :selected').val() + "." + instance.$('#dob-year :selected').val());
+				//const group = Meteor.call('htmlEscape',{str:(calculateGroup(instance.$('#dob-day :selected').val(), instance.$('#dob-month :selected').val(), instance.$('#dob-year :selected').val(), gender));
+
+				Runners.insert({
+					firstName: htmlEscape($('#firstName').val()),
+					lastName: htmlEscape($('#lastName').val()),
+					club: htmlEscape($('#club').val()),
+				//	gender: gender,
+				//	birthday: birthday,
+				//	group: group,
+					createdAt: new Date()
+				});
+
+                $('#overlay').hide();
+                $('#addRunnerForm')[0].reset();
                 Bert.alert("Runner created", 'info');
             }
 
-            if (action === "cancelR") {
+            if (action === "cancelCreation") {
                 $('#overlay').hide();
                 Bert.alert("Action canceled", 'info');
             }
 
-            /*
-            instance.$('.prvCntDiv').hide();
-            instance.$('.navElem').removeClass("w3-green");
-            instance.$(event.currentTarget).addClass("w3-green");
-            instance.$('#' + event.currentTarget.dataset.target).show();
-            */
         }
     });
+}
+
+function htmlEscape(str) {
+	return str
+		.replace(/&/g, '&amp;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
 }

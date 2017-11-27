@@ -11,10 +11,6 @@
   display: table-cell; padding: 0px 5px;
 }
 
-.rFirstCell{ 
-  
-}
-
 .rTableHead{
   padding: 0px 5px;
   display: table-cell;
@@ -26,17 +22,22 @@
 }
 
 #overlay {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
   position: fixed;
   display: none;
   width: 60%;
-  height: 60%;
+  height: auto;
   top: 20%;
   left: 20%;
   right: 20%;
   bottom: 20%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: #54d818;
+  background-image: linear-gradient(to bottom, #54d818, rgb(253, 246, 246) 100%);
   z-index: 2;
   cursor: pointer;
+  text-align: center;
 }
 
 #text{
@@ -47,4 +48,9 @@
   color: white;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
+}
+
+input[type=text].private, input[type=email].private, .rGender{
+  width: 50%;
+  margin: 1% auto;
 }

@@ -49,7 +49,7 @@ Router.route('/', {
 });
 
 if (Meteor.isServer) {
-
+	
 }
 /*
 *  Client actions
